@@ -35,7 +35,7 @@ public class SC_ennemi_02 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // on gère l'affichage du timing avnt le prochain tir _______________
+        // on gère l'affichage du timing avnt la prochaine charge _______________
         if (affichageProchaineCharge != null && delaieMax_charge > 0)
         {
             affichageProchaineCharge.pourcentageRemplissage = (delaieMax_charge - delaieRestant_charge) / delaieMax_charge;
@@ -90,7 +90,7 @@ public class SC_ennemi_02 : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {

@@ -22,7 +22,7 @@ public class SC_petiteParticule : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        float size = size_fin * (t / tempsDeVieMax) + size_debut * (tempsDeVieMax - t / tempsDeVieMax);
+        float size = size_fin * (t / tempsDeVieMax) + size_debut * ((tempsDeVieMax - t) / tempsDeVieMax);
         transform.localScale = size * Vector3.one;
     }
 }

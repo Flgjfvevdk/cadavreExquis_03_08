@@ -23,10 +23,10 @@ public class SC_health : MonoBehaviour
 
     private void Update()
     {
-        if(tempsInvicibilite_restant >= 0)
+        if(tempsInvicibilite_restant > 0)
         {
             tempsInvicibilite_restant -= Time.deltaTime;
-
+            Debug.Log(gameObject.name + " est provisoirement invincible");
         }
     }
 

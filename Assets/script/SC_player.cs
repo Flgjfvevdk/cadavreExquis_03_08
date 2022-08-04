@@ -40,8 +40,8 @@ public class SC_player : MonoBehaviour
 
     // Variables relatifs au input ___________________
     private Vector2 directionInput; //Récupère les touches d'input entrées par le joueurs à travers un vector normé
-    private bool action_1_Input_isPressed;
-    private bool action_2_Input_isPressed;
+    private bool action_1_Input_isPressed; //Pour voir quel touche est lieu à ça, aller voir gestionnaireControlJeu (pas le script)
+    private bool action_2_Input_isPressed; //Pour voir quel touche est lieu à ça, aller voir gestionnaireControlJeu (pas le script)
     // _______________________________________________
 
 
