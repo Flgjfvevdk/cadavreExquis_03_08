@@ -53,6 +53,33 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shield"",
+                    ""type"": ""Button"",
+                    ""id"": ""c100489e-f26e-461f-a56c-4431f6b3144d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShieldSurcharge"",
+                    ""type"": ""Button"",
+                    ""id"": ""e58b8cb4-b80c-4ac1-a41d-8adac1de5cdf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slow"",
+                    ""type"": ""Button"",
+                    ""id"": ""cc2d35e8-ecb5-4fe8-b14f-3b4f021a1248"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +214,39 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""471476ae-f0cc-447a-9671-0b2a012816ce"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0b7612c5-c381-4d20-b957-45dcc3985639"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShieldSurcharge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9eae9dea-74ce-4c76-9b7e-4c1bfcb5d391"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +258,9 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
         m_Player_Deplacement = m_Player.FindAction("Deplacement", throwIfNotFound: true);
         m_Player_Tir = m_Player.FindAction("Tir", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
+        m_Player_ShieldSurcharge = m_Player.FindAction("ShieldSurcharge", throwIfNotFound: true);
+        m_Player_Slow = m_Player.FindAction("Slow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -260,6 +323,9 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
     private readonly InputAction m_Player_Deplacement;
     private readonly InputAction m_Player_Tir;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Shield;
+    private readonly InputAction m_Player_ShieldSurcharge;
+    private readonly InputAction m_Player_Slow;
     public struct PlayerActions
     {
         private @GestionnaireControleJeu m_Wrapper;
@@ -267,6 +333,9 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
         public InputAction @Deplacement => m_Wrapper.m_Player_Deplacement;
         public InputAction @Tir => m_Wrapper.m_Player_Tir;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Shield => m_Wrapper.m_Player_Shield;
+        public InputAction @ShieldSurcharge => m_Wrapper.m_Player_ShieldSurcharge;
+        public InputAction @Slow => m_Wrapper.m_Player_Slow;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -285,6 +354,15 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @Shield.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
+                @Shield.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
+                @Shield.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShield;
+                @ShieldSurcharge.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShieldSurcharge;
+                @ShieldSurcharge.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShieldSurcharge;
+                @ShieldSurcharge.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShieldSurcharge;
+                @Slow.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlow;
+                @Slow.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlow;
+                @Slow.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSlow;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -298,6 +376,15 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Shield.started += instance.OnShield;
+                @Shield.performed += instance.OnShield;
+                @Shield.canceled += instance.OnShield;
+                @ShieldSurcharge.started += instance.OnShieldSurcharge;
+                @ShieldSurcharge.performed += instance.OnShieldSurcharge;
+                @ShieldSurcharge.canceled += instance.OnShieldSurcharge;
+                @Slow.started += instance.OnSlow;
+                @Slow.performed += instance.OnSlow;
+                @Slow.canceled += instance.OnSlow;
             }
         }
     }
@@ -307,5 +394,8 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
         void OnDeplacement(InputAction.CallbackContext context);
         void OnTir(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnShield(InputAction.CallbackContext context);
+        void OnShieldSurcharge(InputAction.CallbackContext context);
+        void OnSlow(InputAction.CallbackContext context);
     }
 }

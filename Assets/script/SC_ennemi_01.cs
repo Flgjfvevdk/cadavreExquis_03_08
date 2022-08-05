@@ -9,10 +9,10 @@ public class SC_ennemi_01 : MonoBehaviour
     public float delaieMax_tir;
     private float delaieRestant_tir;
 
-    public float dispertionAngleTir; //en degree, exprime à quel point le tir pourra être dispercer et pas précisement sur le joueur
+    public float dispertionAngleTir; //en degree, exprime ï¿½ quel point le tir pourra ï¿½tre dispercer et pas prï¿½cisement sur le joueur
 
-    public int nbProjectilesShot;//Nb de projectile tiré en 1 tir
-    public float angleEntreChaqueTir; //Si chaque tir fait spawn plusieurs projectiles, cette variable indique l'écart entre les projectiles
+    public int nbProjectilesShot;//Nb de projectile tirï¿½ en 1 tir
+    public float angleEntreChaqueTir; //Si chaque tir fait spawn plusieurs projectiles, cette variable indique l'ï¿½cart entre les projectiles
 
     public Color couleurBalle;
 
@@ -26,20 +26,20 @@ public class SC_ennemi_01 : MonoBehaviour
     {
         delaieRestant_tir = delaieMax_tir;
 
-        player = GameObject.FindGameObjectWithTag("Player"); // on récupère une référence au player
+        player = GameObject.FindGameObjectWithTag("Player"); // on rï¿½cupï¿½re une rï¿½fï¿½rence au player
     }
 
     // Update is called once per frame
     void Update()
     {
         // On change l'angle de l'ennemi pour qu'il regarde toujours le player. _____________________________________________
-        // Ce script fonctionne car l'angle 0 correspond à l'ennemi qui regarde à droite
+        // Ce script fonctionne car l'angle 0 correspond ï¿½ l'ennemi qui regarde ï¿½ droite
         Vector2 difference = player.transform.position - transform.position;
         float nouvelleAngle = Mathf.Atan2(difference.y, difference.x);
         transform.eulerAngles = new Vector3(0, 0, nouvelleAngle * Mathf.Rad2Deg);
         // __________________________________________________________________________________________________________________
 
-        // on gère l'affichage du timing avnt le prochain tir _______________
+        // on gï¿½re l'affichage du timing avnt le prochain tir _______________
         if(affichageProchainTir != null && delaieMax_tir > 0)
         {
             affichageProchainTir.pourcentageRemplissage = (delaieMax_tir - delaieRestant_tir) / delaieMax_tir;
@@ -49,15 +49,15 @@ public class SC_ennemi_01 : MonoBehaviour
         if (delaieRestant_tir <= 0) 
         {
 
-            // On génère une valeur aléatoire r qui correspond à l'erreur de trajectoire par rapport 
+            // On gï¿½nï¿½re une valeur alï¿½atoire r qui correspond ï¿½ l'erreur de trajectoire par rapport 
             float r = Random.Range(- dispertionAngleTir, dispertionAngleTir);
 
             for (int k = 0; k < nbProjectilesShot; k++)
             {
-                // On créer la balle dans la scene
+                // On crï¿½er la balle dans la scene
                 GameObject balle_inst = Instantiate(balle_prefab, transform.position, Quaternion.identity);
-
-                float ajoutAngle; //Cette variable permet au k-ième projectile de spawn avec un certain angle (différent des autres)
+                balle_inst.tag = "Projectile";
+                float ajoutAngle; //Cette variable permet au k-iï¿½me projectile de spawn avec un certain angle (diffï¿½rent des autres)
                 float angBase = 0f;
                 if(nbProjectilesShot % 2 == 0)
                 {

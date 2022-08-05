@@ -17,7 +17,7 @@ public class SC_ennemi_03 : MonoBehaviour
     public bool keepRotatingWhenAttack;
 
     private bool is_laserActivate;
-    private List<GameObject> lasers_instantiated; //Contient une référence aux laser instantiés pour pouvoir les détruires le temps voulus
+    private List<GameObject> lasers_instantiated; //Contient une rï¿½fï¿½rence aux laser instantiï¿½s pour pouvoir les dï¿½truires le temps voulus
 
     //C'est le cercle de couleur qui indique le temps avant la prochaine charge
     public SC_affichageActionTiming affichageProchaineCharge;
@@ -32,7 +32,7 @@ public class SC_ennemi_03 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // on gère l'affichage du timing avnt le laser _______________
+        // on gï¿½re l'affichage du timing avnt le laser _______________
         if (affichageProchaineCharge != null && delaieMax_laser > 0)
         {
             affichageProchaineCharge.pourcentageRemplissage = (delaieMax_laser - delaieRestant_laser) / delaieMax_laser;
@@ -56,7 +56,7 @@ public class SC_ennemi_03 : MonoBehaviour
                 
                 delaieRestant_laser = delaieMax_laser;
 
-                //On détruit les lasers instantiés (car l'attaque est fini)
+                //On dï¿½truit les lasers instantiï¿½s (car l'attaque est fini)
                 foreach(GameObject laser in lasers_instantiated)
                 {
                     Destroy(laser);
@@ -73,16 +73,16 @@ public class SC_ennemi_03 : MonoBehaviour
 
                 dureeRestant_laserActif = dureeMax_laserActif;
 
-                //On garde une ref vers les lasers créés pour pouvoir les détruires plus tard
+                //On garde une ref vers les lasers crï¿½ï¿½s pour pouvoir les dï¿½truires plus tard
                 GameObject laser_horizontal = Instantiate(laser_prefab, transform.position, Quaternion.Euler(0, 0, angleRot));
                 GameObject laser_vertical = Instantiate(laser_prefab, transform.position, Quaternion.Euler(0, 0, angleRot + 90));
                 lasers_instantiated.Add(laser_horizontal);
                 lasers_instantiated.Add(laser_vertical);
 
-                laser_horizontal.transform.parent = transform; //on lie le laser à l'ennemi (comme ça si on fait bouger l'ennemi, le laser suit)
-                laser_vertical.transform.parent = transform; //on lie le laser à l'ennemi (comme ça si on fait bouger l'ennemi, le laser suit)
+                laser_horizontal.transform.parent = transform; //on lie le laser ï¿½ l'ennemi (comme ï¿½a si on fait bouger l'ennemi, le laser suit)
+                laser_vertical.transform.parent = transform; //on lie le laser ï¿½ l'ennemi (comme ï¿½a si on fait bouger l'ennemi, le laser suit)
 
-                //On change la couleur comme souhaité
+                //On change la couleur comme souhaitï¿½
                 laser_horizontal.GetComponent<SpriteRenderer>().color = couleurLaser;
                 laser_vertical.GetComponent<SpriteRenderer>().color = couleurLaser;
 

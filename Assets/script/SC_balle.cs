@@ -18,12 +18,13 @@ public class SC_balle : MonoBehaviour
 
     public void allerVers(Vector2 direction)
     {
-        rb.velocity = speed * direction.normalized; //On norme direction pour être sur que la vitesse soit bien speed
+        rb.velocity = speed * direction.normalized; //On norme direction pour ï¿½tre sur que la vitesse soit bien speed
     }
 
     public void allerVers(Vector2 direction, float vitesse)
     {
-        rb.velocity = vitesse * direction.normalized; //On norme direction pour être sur que la vitesse soit bien speed
+        rb.velocity = vitesse * direction.normalized; //On norme direction pour ï¿½tre sur que la vitesse soit bien speed
+       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,7 +35,7 @@ public class SC_balle : MonoBehaviour
             collision.GetComponent<SC_health>().getHit();
 
             GameObject particule = Instantiate(particule_effetFinVie, transform.position, Quaternion.identity);
-
+            
             Color couleurProj = GetComponent<SpriteRenderer>().color;
 
             particule.GetComponent<SpriteRenderer>().color = new Color(couleurProj.r, couleurProj.g, couleurProj.b, particule.GetComponent<SpriteRenderer>().color.a);

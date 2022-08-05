@@ -38,10 +38,17 @@ public class SC_player : MonoBehaviour
     private float delaieRestant_spawnPetiteParticule;
     // ____________________________________________________
 
+    // Variables pour le shield ____________________________
+    public int shield;
+    public bool isShield;
+
     // Variables relatifs au input ___________________
     private Vector2 directionInput; //R�cup�re les touches d'input entr�es par le joueurs � travers un vector norm�
     private bool action_1_Input_isPressed; //Pour voir quel touche est lieu � �a, aller voir gestionnaireControlJeu (pas le script)
     private bool action_2_Input_isPressed; //Pour voir quel touche est lieu � �a, aller voir gestionnaireControlJeu (pas le script)
+    private bool action_3_Input_isPressed; //Pour voir quel touche est lieu � �a, aller voir gestionnaireControlJeu (pas le script)
+    private bool action_4_Input_isPressed; //Pour voir quel touche est lieu � �a, aller voir gestionnaireControlJeu (pas le script)
+    private bool action_5_Input_isPressed; //Pour voir quel touche est lieu � �a, aller voir gestionnaireControlJeu (pas le script)
     // ____________________________________________________
 
     // Awake est appel� quand l'instance du script est charg� (et donc avant les �ventuelles start)
@@ -49,6 +56,8 @@ public class SC_player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>(); //on r�cup�re la composante rigidbody2D du gameobject attach� � ce script
         healthScript = GetComponent<SC_health>(); //on r�cup�re une r�f�rence au script de pv
+        shield = 0;
+        isShield = false;
     }
 
     // Update is called once per frame
@@ -88,8 +97,12 @@ public class SC_player : MonoBehaviour
             }
         }
 
-        //On d�place le joueur si n�cessaire en jouant sur sa vitesse.
-        rb.velocity = speed * directionInput;
+        //On d�place le joueur si n�cessaire en jouant sur sa vitesse avec l'option slow
+        if (action_5_Input_isPressed) {
+            rb.velocity = speed * directionInput/2;
+        } else {
+            rb.velocity = speed * directionInput;
+        }
 
         //Le joueur effectue l'action 1 si voulue
         if (action_1_Input_isPressed && delaieRestant_tir <= 0)
@@ -128,6 +141,25 @@ public class SC_player : MonoBehaviour
             GetComponent<SpriteRenderer>().color = new Color(ancienneCouleur.r, ancienneCouleur.g, ancienneCouleur.b, opacitePendantDash); //On garde tout sauf l'opacite qui est modifi�e.
         }
         // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // on gère les actions possibles avec le bouclier
+        if (action_3_Input_isPressed && shield > 0){ // en utilisant 1 "bouclier" le joueur peut se shield
+            shield -= 1;
+            healthScript.getShield();
+        }
+        if (action_4_Input_isPressed && shield >= 3){ // en utilisant 3 "bouclier" le joueur peut détruire tout les projectiles présents
+            shield -= 3;
+            foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("MainCamera"))
+            {
+                bullet.GetComponent<SC_camera>().shake = 10.0f;
+            }
+            foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("Projectile"))
+            {
+                Destroy(bullet);
+            }
+        }
+        isShield = healthScript.IsShielded();
+
+        
 
     }
 
@@ -143,6 +175,11 @@ public class SC_player : MonoBehaviour
         }
     }
 
+    // fonctions de gestion du shield
+     public void addShield()
+    {
+        shield += 1;
+    }
 
     // fonctions de detection et mise � jour et input //////////////////////////////////////////////////////////////////
     public void maj_directionInput(InputAction.CallbackContext ctx)
@@ -177,5 +214,49 @@ public class SC_player : MonoBehaviour
             action_2_Input_isPressed = false;
         }
     }
+
+
+    public void maj_action_3_Input(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            //On est l� quand le joueur appuie sur la touche
+            action_3_Input_isPressed = true;
+        }
+        else if (ctx.canceled)
+        {
+            //On est l� quand le joueur vient de relacher la touche
+            action_3_Input_isPressed = false;
+        }
+    }
+   
+   public void maj_action_4_Input(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            //On est l� quand le joueur appuie sur la touche
+            action_4_Input_isPressed = true;
+        }
+        else if (ctx.canceled)
+        {
+            //On est l� quand le joueur vient de relacher la touche
+            action_4_Input_isPressed = false;
+        }
+    }
+
+    public void maj_action_5_Input(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            //On est l� quand le joueur appuie sur la touche
+            action_5_Input_isPressed = true;
+        }
+        else if (ctx.canceled)
+        {
+            //On est l� quand le joueur vient de relacher la touche
+            action_5_Input_isPressed = false;
+        }
+    }
+
     // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

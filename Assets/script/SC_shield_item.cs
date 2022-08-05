@@ -16,8 +16,8 @@ public class SC_shield_item : MonoBehaviour
         //si le joueur récupère l'items
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<SC_health>().getShield();
-
+            //collision.GetComponent<SC_health>().getShield();
+            collision.GetComponent<SC_player>().addShield();
             Destroy(gameObject);
         }
     }

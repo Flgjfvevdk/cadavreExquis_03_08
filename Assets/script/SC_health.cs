@@ -18,6 +18,8 @@ public class SC_health : MonoBehaviour
     public float tempsbouclier_max;
     private float tempsbouclier_restant;
 
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -30,12 +32,12 @@ public class SC_health : MonoBehaviour
         if(tempsInvicibilite_restant > 0)
         {
             tempsInvicibilite_restant -= Time.deltaTime;
-            Debug.Log(gameObject.name + " est provisoirement invincible");
+            //Debug.Log(gameObject.name + " est provisoirement invincible");
         }
         if(tempsbouclier_restant > 0)
         {
             tempsbouclier_restant -= Time.deltaTime;
-            Debug.Log(gameObject.name + " a un bouclier");
+            //Debug.Log(gameObject.name + " a un bouclier");
         }
     }
 
@@ -51,6 +53,7 @@ public class SC_health : MonoBehaviour
     {
         tempsbouclier_restant = tempsbouclier_max;
     }
+
 
     public void getHit(float damage = 1) //On surchage getHit
     {
@@ -96,5 +99,8 @@ public class SC_health : MonoBehaviour
         return tempsInvicibilite_restant > 0;
     }
 
-
+    public bool IsShielded()
+    {
+        return tempsbouclier_restant > 0;
+    }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SC_spawner : MonoBehaviour
 {
     public GameObject objet;
@@ -9,17 +10,21 @@ public class SC_spawner : MonoBehaviour
     public float delaieMax_spawn;
     private float delaieRestant_spawn;
 
+    private float i;
+
     public float rayonSpawn;
     // Start is called before the first frame update
     void Start()
     {
         delaieRestant_spawn = delaieMax_spawn;
+        i = 2;
     }
 
     // Update is called once per frame
     void Update()
     {
-        delaieRestant_spawn -= Time.deltaTime;
+        i ++; 
+        delaieRestant_spawn -= Time.deltaTime*(i/(Mathf.Log(i)*1000));
         if(delaieRestant_spawn <= 0)
         {
             float angleAleat = Random.Range(0f, 360f);
