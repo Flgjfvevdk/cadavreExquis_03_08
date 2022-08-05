@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Ne pas oublier d'importer ça pour utiliser le new input systeme _______________________________________________________________
+// Ne pas oublier d'importer ï¿½a pour utiliser le new input systeme _______________________________________________________________
 using UnityEngine.InputSystem; 
 
 public class SC_player : MonoBehaviour
 {
-    // Variables pour les dégâts et les pv _______________
+    // Variables pour les dï¿½gï¿½ts et les pv _______________
     private SC_health healthScript;
     // ___________________________________________________
 
-    // Variables pour le déplacement ________
+    // Variables pour le dï¿½placement ________
     public float speed;
     private Rigidbody2D rb;
     // ______________________________________
 
     // variables pour le tir ____________________________
-    public GameObject balle_prefab; // prefab de l'objet instantié avec l'action 1, cela peut être n'importe quoi.
+    public GameObject balle_prefab; // prefab de l'objet instantiï¿½ avec l'action 1, cela peut ï¿½tre n'importe quoi.
     public float vitesseProjectile;
     public float delaieMax_tir;
     private float delaieRestant_tir;
@@ -27,7 +27,7 @@ public class SC_player : MonoBehaviour
     public float dureeDash; // Le temps que met le dash 
     public float vitesseDash; // vitesse du dash
     private bool isDashing;
-    private Vector2 directionDash; // Si isDashing est vrai, cette variable enregistre la position qu'aura le joueur à la fin du dash
+    private Vector2 directionDash; // Si isDashing est vrai, cette variable enregistre la position qu'aura le joueur ï¿½ la fin du dash
     public float delaieMax_dash;
     private float delaieRestant_dash;
     private float t_dash;
@@ -39,17 +39,16 @@ public class SC_player : MonoBehaviour
     // ____________________________________________________
 
     // Variables relatifs au input ___________________
-    private Vector2 directionInput; //Récupère les touches d'input entrées par le joueurs à travers un vector normé
-    private bool action_1_Input_isPressed; //Pour voir quel touche est lieu à ça, aller voir gestionnaireControlJeu (pas le script)
-    private bool action_2_Input_isPressed; //Pour voir quel touche est lieu à ça, aller voir gestionnaireControlJeu (pas le script)
-    // _______________________________________________
+    private Vector2 directionInput; //Rï¿½cupï¿½re les touches d'input entrï¿½es par le joueurs ï¿½ travers un vector normï¿½
+    private bool action_1_Input_isPressed; //Pour voir quel touche est lieu ï¿½ ï¿½a, aller voir gestionnaireControlJeu (pas le script)
+    private bool action_2_Input_isPressed; //Pour voir quel touche est lieu ï¿½ ï¿½a, aller voir gestionnaireControlJeu (pas le script)
+    // ____________________________________________________
 
-
-    // Awake est appelé quand l'instance du script est chargé (et donc avant les éventuelles start)
+    // Awake est appelï¿½ quand l'instance du script est chargï¿½ (et donc avant les ï¿½ventuelles start)
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>(); //on récupère la composante rigidbody2D du gameobject attaché à ce script
-        healthScript = GetComponent<SC_health>(); //on récupère une référence au script de pv
+        rb = GetComponent<Rigidbody2D>(); //on rï¿½cupï¿½re la composante rigidbody2D du gameobject attachï¿½ ï¿½ ce script
+        healthScript = GetComponent<SC_health>(); //on rï¿½cupï¿½re une rï¿½fï¿½rence au script de pv
     }
 
     // Update is called once per frame
@@ -57,7 +56,7 @@ public class SC_player : MonoBehaviour
     {
         miseAJour_variablesTemporelles();
 
-        // On gère le dash (action2)
+        // On gï¿½re le dash (action2)
         if (isDashing)
         {
             if(t_dash < dureeDash)
@@ -75,46 +74,46 @@ public class SC_player : MonoBehaviour
                     delaieRestant_spawnPetiteParticule -= Time.deltaTime;
                 }
 
-                return; //En mettant ce return ici, cela permet d'empêcher de tirer et de se déplacer pendant le dash. (c'est important de pas pouvoir se déplacer pdt le dash vu la façon dont est codé le dash
+                return; //En mettant ce return ici, cela permet d'empï¿½cher de tirer et de se dï¿½placer pendant le dash. (c'est important de pas pouvoir se dï¿½placer pdt le dash vu la faï¿½on dont est codï¿½ le dash
             }else
             {
                 isDashing = false;
                 healthScript.cantBeDamaged = false;
 
-                //on s'occupe de changer l'opacité pour la remettre à 1
-                Color ancienneCouleur = GetComponent<SpriteRenderer>().color;//On enregistre la couleur qu'on a donné au joueur pour pas lui changer.
+                //on s'occupe de changer l'opacitï¿½ pour la remettre ï¿½ 1
+                Color ancienneCouleur = GetComponent<SpriteRenderer>().color;//On enregistre la couleur qu'on a donnï¿½ au joueur pour pas lui changer.
                 GetComponent<SpriteRenderer>().color = new Color(ancienneCouleur.r, ancienneCouleur.g, ancienneCouleur.b, 1);
                 
-                delaieRestant_dash = delaieMax_dash; //On commence la recup de delaie du dash seulement à la fin de celui ci
+                delaieRestant_dash = delaieMax_dash; //On commence la recup de delaie du dash seulement ï¿½ la fin de celui ci
             }
         }
 
-        //On déplace le joueur si nécessaire en jouant sur sa vitesse.
+        //On dï¿½place le joueur si nï¿½cessaire en jouant sur sa vitesse.
         rb.velocity = speed * directionInput;
 
         //Le joueur effectue l'action 1 si voulue
         if (action_1_Input_isPressed && delaieRestant_tir <= 0)
         {
-            // On fait spawn un gameobject, à la position transform.position (càd à la même position que le player) Et avec une rotation null.
-            // spawnedObject fait référence fait référence à l'objet instantié, tandis que spawnedObject_action1 fait référence au
+            // On fait spawn un gameobject, ï¿½ la position transform.position (cï¿½d ï¿½ la mï¿½me position que le player) Et avec une rotation null.
+            // spawnedObject fait rï¿½fï¿½rence fait rï¿½fï¿½rence ï¿½ l'objet instantiï¿½, tandis que spawnedObject_action1 fait rï¿½fï¿½rence au
             // prefab (un objet abstrait qui n'est pas dans la scene).
             GameObject projectile = Instantiate(balle_prefab, transform.position, Quaternion.identity);
             delaieRestant_tir = delaieMax_tir;
 
-            //On récupère la position de la souris dans l'espace
+            //On rï¿½cupï¿½re la position de la souris dans l'espace
             Vector3 positionSouris = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             Vector3 directionTir = positionSouris - transform.position;
 
-            //!\\ Ici je sais que j'instantie un prefab qui possède le script SC_balle. Si le prefab ou le script accroché à ce prefab change,
-            //alors il faut adapter la ligne en dessous en conséquence //!\\
-            projectile.GetComponent<SC_balle>().allerVers(directionTir, vitesseProjectile); // On récupère le script de l'objet instantié et on exécute un script à distance
+            //!\\ Ici je sais que j'instantie un prefab qui possï¿½de le script SC_balle. Si le prefab ou le script accrochï¿½ ï¿½ ce prefab change,
+            //alors il faut adapter la ligne en dessous en consï¿½quence //!\\
+            projectile.GetComponent<SC_balle>().allerVers(directionTir, vitesseProjectile); // On rï¿½cupï¿½re le script de l'objet instantiï¿½ et on exï¿½cute un script ï¿½ distance
             projectile.GetComponent<SC_balle>().isFromPlayer = true;
         }
 
         //Le joueur effectue l'action 2 si voulue /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         if (action_2_Input_isPressed && delaieRestant_dash <= 0)
         {
-            //On met la variable à true
+            //On met la variable ï¿½ true
             isDashing = true;
             t_dash = 0;
 
@@ -124,9 +123,9 @@ public class SC_player : MonoBehaviour
             Vector3 positionSouris = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             directionDash = (positionSouris - transform.position).normalized;
 
-            //on s'occupe de changer l'opacité
-            Color ancienneCouleur = GetComponent<SpriteRenderer>().color; //On enregistre la couleur qu'on a donné au joueur pour pas lui changer.
-            GetComponent<SpriteRenderer>().color = new Color(ancienneCouleur.r, ancienneCouleur.g, ancienneCouleur.b, opacitePendantDash); //On garde tout sauf l'opacite qui est modifiée.
+            //on s'occupe de changer l'opacitï¿½
+            Color ancienneCouleur = GetComponent<SpriteRenderer>().color; //On enregistre la couleur qu'on a donnï¿½ au joueur pour pas lui changer.
+            GetComponent<SpriteRenderer>().color = new Color(ancienneCouleur.r, ancienneCouleur.g, ancienneCouleur.b, opacitePendantDash); //On garde tout sauf l'opacite qui est modifiï¿½e.
         }
         // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -145,7 +144,7 @@ public class SC_player : MonoBehaviour
     }
 
 
-    // fonctions de detection et mise à jour et input //////////////////////////////////////////////////////////////////
+    // fonctions de detection et mise ï¿½ jour et input //////////////////////////////////////////////////////////////////
     public void maj_directionInput(InputAction.CallbackContext ctx)
     {
         directionInput = ctx.ReadValue<Vector2>();
@@ -155,12 +154,12 @@ public class SC_player : MonoBehaviour
     {
         if (ctx.performed)
         {
-            //On est là quand le joueur appuie sur la touche
+            //On est lï¿½ quand le joueur appuie sur la touche
             action_1_Input_isPressed = true;
         }
         else if (ctx.canceled)
         {
-            //On est là quand le joueur vient de relacher la touche
+            //On est lï¿½ quand le joueur vient de relacher la touche
             action_1_Input_isPressed = false;
         }
     }
@@ -169,12 +168,12 @@ public class SC_player : MonoBehaviour
     {
         if (ctx.performed)
         {
-            //On est là quand le joueur appuie sur la touche
+            //On est lï¿½ quand le joueur appuie sur la touche
             action_2_Input_isPressed = true;
         }
         else if (ctx.canceled)
         {
-            //On est là quand le joueur vient de relacher la touche
+            //On est lï¿½ quand le joueur vient de relacher la touche
             action_2_Input_isPressed = false;
         }
     }

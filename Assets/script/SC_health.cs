@@ -13,7 +13,11 @@ public class SC_health : MonoBehaviour
     public float tempsInvicibilite_max;
     private float tempsInvicibilite_restant;
 
-    public bool cantBeDamaged; //Faux = peut se prendre des dégâts
+    public bool cantBeDamaged; //Faux = peut se prendre des dï¿½gï¿½ts
+
+    public float tempsbouclier_max;
+    private float tempsbouclier_restant;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,17 +32,35 @@ public class SC_health : MonoBehaviour
             tempsInvicibilite_restant -= Time.deltaTime;
             Debug.Log(gameObject.name + " est provisoirement invincible");
         }
+        if(tempsbouclier_restant > 0)
+        {
+            tempsbouclier_restant -= Time.deltaTime;
+            Debug.Log(gameObject.name + " a un bouclier");
+        }
+    }
+
+    public void getLife()
+    {
+        if(current_hp < max_hp)
+        {
+            current_hp += 1;
+        }
+    }
+
+    public void getShield()
+    {
+        tempsbouclier_restant = tempsbouclier_max;
     }
 
     public void getHit(float damage = 1) //On surchage getHit
     {
         // Si cantBeDamaged est vrai, alors on annule le getHit
-        if (cantBeDamaged || tempsInvicibilite_restant > 0)
+        if (cantBeDamaged || tempsInvicibilite_restant > 0 || tempsbouclier_restant > 0)
         {
             return;
         }
 
-        //On diminue les pj d'autant que nécessaire
+        //On diminue les pj d'autant que nï¿½cessaire
         current_hp -= damage;
 
         //On rend invicible le gameobject (si tempsInvicibilite_max = 0, il se deviendra pas invincible)
@@ -58,13 +80,13 @@ public class SC_health : MonoBehaviour
 
     private void dieEnnemy()
     {
-        //On peut rajouter un effet à la mort ou autre ici
+        //On peut rajouter un effet ï¿½ la mort ou autre ici
         Destroy(gameObject);
     }
 
     private void diePlayer()
     {
-        // Juste un truc provisoire à changer
+        // Juste un truc provisoire ï¿½ changer
         Debug.LogWarning("Faudra changer, pour l'instant on reload juste la scene quand le pj meurt");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
