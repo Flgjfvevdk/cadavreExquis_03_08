@@ -26,7 +26,7 @@ public class SC_spawner : MonoBehaviour
     {
         i ++; 
         delaieRestant_spawn -= Time.deltaTime*(i/(Mathf.Log(i)*1000));
-        if(delaieRestant_spawn <= 0 || GameObject.FindGameObjectsWithTag(objet.tag).Length < MAX_INSTANCES)
+        if(delaieRestant_spawn <= 0 && GameObject.FindGameObjectsWithTag(objet.tag).Length < MAX_INSTANCES)
         {
             float angleAleat = Random.Range(0f, 360f);
             float r = Random.Range(0f, rayonSpawn);

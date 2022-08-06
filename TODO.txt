@@ -1,7 +1,7 @@
 ~~- Mettre une barre de vie au joueur~~
 ~~- Un indice pour savoir qu'on est protege avec le power up~~
-- Nombre max d'ennemis dans le niveau
-- Pouvoir attaquer les ennemis
+~~- Nombre max d'ennemis dans le niveau~~
+~~- Pouvoir attaquer les ennemis~~ (Already existed)
 - Un score
 - Des animations de mort des ennemis
 - Menu Principal
