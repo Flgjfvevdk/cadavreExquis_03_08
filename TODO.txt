@@ -1,0 +1,11 @@
+- Mettre une barre de vie au joueur
+- Un indice pour savoir qu'on est protege avec le power up
+- Nombre max d'ennemies dans le niveau
+- Pouvoir attaquer les ennemies
+- Un score
+- Des animations de mort des ennemies
+- Menu Principal
+- Menu pause
+- Menu de fin de jeu
+- Spawner avec place aleatoire et entite spawn aleatoire
+- Mettre une photo/animation de background
