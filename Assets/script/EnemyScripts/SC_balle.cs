@@ -7,6 +7,7 @@ public class SC_balle : MonoBehaviour
     public float speed;
 
     private Rigidbody2D rb;
+    public int power { get; set; }
 
     public bool isFromPlayer; //Si c'est vrai alors la balle va tenter de kill les ennemies, sinon ce sera le joueur
 
@@ -24,18 +25,18 @@ public class SC_balle : MonoBehaviour
     public void allerVers(Vector2 direction, float vitesse)
     {
         rb.velocity = vitesse * direction.normalized; //On norme direction pour �tre sur que la vitesse soit bien speed
-       
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //2 cas de figures possibles, soit la balle vient du player et target les ennemies. Soit elle ne vient pas du joueur et le target 
-        if ( (isFromPlayer && collision.CompareTag("Ennemi")) || (!isFromPlayer && collision.CompareTag("Player")) )
+        if ((isFromPlayer && collision.CompareTag("Ennemi")) || (!isFromPlayer && collision.CompareTag("Player")))
         {
-            collision.GetComponent<SC_health>().getHit();
+            collision.GetComponent<SC_health>().getHit(power);
 
             GameObject particule = Instantiate(particule_effetFinVie, transform.position, Quaternion.identity);
-            
+
             Color couleurProj = GetComponent<SpriteRenderer>().color;
 
             particule.GetComponent<SpriteRenderer>().color = new Color(couleurProj.r, couleurProj.g, couleurProj.b, particule.GetComponent<SpriteRenderer>().color.a);

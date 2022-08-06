@@ -38,6 +38,9 @@ public class SC_player : MonoBehaviour
     private float delaieRestant_spawnPetiteParticule;
     // ____________________________________________________
 
+    // Variables pour l'attaque
+    private int power;
+
     // Variables pour le shield ____________________________
     public int shield;
     public bool isShield;
@@ -60,6 +63,7 @@ public class SC_player : MonoBehaviour
         healthScript = GetComponent<SC_health>(); //on r�cup�re une r�f�rence au script de pv
         shield = 0;
         isShield = false;
+        power = 1;
     }
 
     // Update is called once per frame
@@ -128,6 +132,7 @@ public class SC_player : MonoBehaviour
             //alors il faut adapter la ligne en dessous en cons�quence //!\\
             projectile.GetComponent<SC_balle>().allerVers(directionTir, vitesseProjectile); // On r�cup�re le script de l'objet instanti� et on ex�cute un script � distance
             projectile.GetComponent<SC_balle>().isFromPlayer = true;
+            projectile.GetComponent<SC_balle>().power = this.power;
         }
 
         //Le joueur effectue l'action 2 si voulue /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
