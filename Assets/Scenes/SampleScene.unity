@@ -410,7 +410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47f58133a7e4344fb58c35b4ee3edff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 567185246}
+  health: {fileID: 1409719713}
   healthBarImage: {fileID: 293213797}
 --- !u!114 &293213797
 MonoBehaviour:
@@ -1917,8 +1917,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b47f58133a7e4344fb58c35b4ee3edff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  healthBarImage: {fileID: 0}
+  health: {fileID: 1409719713}
+  healthBarImage: {fileID: 1604113095}
 --- !u!114 &1604113095
 MonoBehaviour:
   m_ObjectHideFlags: 0

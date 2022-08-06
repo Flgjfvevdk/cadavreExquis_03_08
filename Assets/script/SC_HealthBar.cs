@@ -8,7 +8,7 @@ public class SC_HealthBar : MonoBehaviour
 {
     // cette syntax permet de modifier l'objet dans l'UI de Unity tout en le gardant private
     [SerializeField]
-    private SC_player player;
+    private SC_health health;
     [SerializeField]
     private Image healthBarImage;
     // Start is called before the first frame update
@@ -25,8 +25,8 @@ public class SC_HealthBar : MonoBehaviour
 
     public void updateHealthBar()
     {
-        float current = player.GetPlayerHealth().GetCurrentHP();
-        float max = player.GetPlayerHealth().max_hp;
+        float current = health.GetCurrentHP();
+        float max = health.max_hp;
         float duration = 0.75f * (current / max);
         healthBarImage.DOFillAmount(current / max, duration);
     }

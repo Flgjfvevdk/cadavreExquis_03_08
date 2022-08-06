@@ -17,7 +17,6 @@ public class SC_health : MonoBehaviour
     // pour la barre de vie
     [SerializeField]
     private SC_HealthBar healthBar;
-    
 
 
 
@@ -84,6 +83,7 @@ public class SC_health : MonoBehaviour
     {
         //On peut rajouter un effet � la mort ou autre ici
         Destroy(gameObject);
+
     }
 
     private void diePlayer()
