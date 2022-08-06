@@ -41,6 +41,8 @@ public class SC_player : MonoBehaviour
     // Variables pour le shield ____________________________
     public int shield;
     public bool isShield;
+    [SerializeField]
+    private SC_shield playerShield;
 
     // Variables relatifs au input ___________________
     private Vector2 directionInput; //R�cup�re les touches d'input entr�es par le joueurs � travers un vector norm�
@@ -150,7 +152,7 @@ public class SC_player : MonoBehaviour
         if (action_3_Input_isPressed && shield > 0)
         { // en utilisant 1 "bouclier" le joueur peut se shield
             shield -= 1;
-            healthScript.getShield();
+            playerShield.getShield();
         }
         if (action_4_Input_isPressed && shield >= 3)
         { // en utilisant 3 "bouclier" le joueur peut détruire tout les projectiles présents
@@ -164,7 +166,7 @@ public class SC_player : MonoBehaviour
                 Destroy(bullet);
             }
         }
-        isShield = healthScript.IsShielded();
+        isShield = playerShield.IsShielded();
 
 
 

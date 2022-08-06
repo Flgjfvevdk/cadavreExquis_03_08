@@ -14,14 +14,11 @@ public class SC_health : MonoBehaviour
     private float tempsInvicibilite_restant;
 
     public bool cantBeDamaged; //Faux = peut se prendre des d�g�ts
-
-    public float tempsbouclier_max;
-    private float tempsbouclier_restant;
-
+    // pour la barre de vie
     [SerializeField]
     private SC_HealthBar healthBar;
-
     
+
 
 
     // Start is called before the first frame update
@@ -32,37 +29,28 @@ public class SC_health : MonoBehaviour
 
     private void Update()
     {
-        if(tempsInvicibilite_restant > 0)
+        if (tempsInvicibilite_restant > 0)
         {
             tempsInvicibilite_restant -= Time.deltaTime;
             //Debug.Log(gameObject.name + " est provisoirement invincible");
-        }
-        if(tempsbouclier_restant > 0)
-        {
-            tempsbouclier_restant -= Time.deltaTime;
-            //Debug.Log(gameObject.name + " a un bouclier");
         }
     }
 
     public void getLife()
     {
-        if(current_hp < max_hp)
+        if (current_hp < max_hp)
         {
             current_hp += 1;
             this.healthBar.updateHealthBar();
         }
     }
 
-    public void getShield()
-    {
-        tempsbouclier_restant = tempsbouclier_max;
-    }
 
 
     public void getHit(float damage = 1) //On surchage getHit
     {
         // Si cantBeDamaged est vrai, alors on annule le getHit
-        if (cantBeDamaged || tempsInvicibilite_restant > 0 || tempsbouclier_restant > 0)
+        if (cantBeDamaged || tempsInvicibilite_restant > 0)
         {
             return;
         }
@@ -79,7 +67,8 @@ public class SC_health : MonoBehaviour
             if (isPlayer)
             {
                 diePlayer();
-            } else
+            }
+            else
             {
                 dieEnnemy();
             }
@@ -107,10 +96,5 @@ public class SC_health : MonoBehaviour
     public bool isInvincible()
     {
         return tempsInvicibilite_restant > 0;
-    }
-
-    public bool IsShielded()
-    {
-        return tempsbouclier_restant > 0;
     }
 }
