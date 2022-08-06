@@ -1,4 +1,4 @@
-- Mettre une barre de vie au joueur
+~~- Mettre une barre de vie au joueur~~
 - Un indice pour savoir qu'on est protege avec le power up
 - Nombre max d'ennemies dans le niveau
 - Pouvoir attaquer les ennemies
