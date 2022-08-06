@@ -16,8 +16,7 @@ public class SC_atk_boost_item : MonoBehaviour
         //si le joueur récupère l'items
         if (collision.CompareTag("Player"))
         {
-
-
+            collision.GetComponent<SC_player>().StartAtkBoost();
             Destroy(gameObject);
         }
     }

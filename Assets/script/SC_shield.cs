@@ -23,20 +23,7 @@ public class SC_shield : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // TODO Voltini : pas fan de la recherche de statut de shield, au lieu de tester a chaque
-        // frame il suffit de declencher une fonction quand le temps restant du shield arrive a 0
-        Debug.Log("temps restant" + tempsbouclier_restant);
-        if (tempsbouclier_restant > 0)
-        {
-            tempsbouclier_restant -= Time.deltaTime;
-            //Debug.Log(gameObject.name + " a un bouclier");
-            Debug.Log("temps restant" + tempsbouclier_restant);
-            if (!this.IsShielded())
-            {
-                this.updateShieldState(false);
-                shieldImage.updateSprite(false);
-            }
-        }
+
     }
 
     public void updateShieldState(bool playerIsShielded)
@@ -47,14 +34,21 @@ public class SC_shield : MonoBehaviour
 
     public void getShield()
     {
-        tempsbouclier_restant = tempsbouclier_max;
         this.updateShieldState(true);
         shieldImage.updateSprite(true);
+        StartCoroutine(DisableShieldAfter(tempsbouclier_max));
+    }
+
+    IEnumerator DisableShieldAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        this.updateShieldState(false);
+        shieldImage.updateSprite(false);
     }
 
     public bool IsShielded()
     {
-        return tempsbouclier_restant > 0;
+        return GetComponent<SpriteRenderer>().enabled;
     }
 
 }

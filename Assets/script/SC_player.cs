@@ -39,13 +39,15 @@ public class SC_player : MonoBehaviour
     // ____________________________________________________
 
     // Variables pour l'attaque
-    private int power;
+    public int power { set; get; }
 
     // Variables pour le shield ____________________________
     public int shield;
     public bool isShield;
     [SerializeField]
     private SC_shield playerShield;
+    [SerializeField]
+    private SC_shieldAmmo shieldText;
 
     // Variables relatifs au input ___________________
     private Vector2 directionInput; //R�cup�re les touches d'input entr�es par le joueurs � travers un vector norm�
@@ -157,11 +159,13 @@ public class SC_player : MonoBehaviour
         if (action_3_Input_isPressed && shield > 0)
         { // en utilisant 1 "bouclier" le joueur peut se shield
             shield -= 1;
+            shieldText.UpdateRemaining(shield);
             playerShield.getShield();
         }
         if (action_4_Input_isPressed && shield >= 3)
         { // en utilisant 3 "bouclier" le joueur peut détruire tout les projectiles présents
             shield -= 3;
+            shieldText.UpdateRemaining(shield);
             foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("MainCamera"))
             {
                 bullet.GetComponent<SC_camera>().shake = 10.0f;
@@ -193,6 +197,7 @@ public class SC_player : MonoBehaviour
     public void addShield()
     {
         shield += 1;
+        shieldText.UpdateRemaining(shield);
     }
 
     // fonctions de detection et mise � jour et input //////////////////////////////////////////////////////////////////
@@ -278,4 +283,16 @@ public class SC_player : MonoBehaviour
     }
 
     // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // gestion des boosts d'atk
+    public void StartAtkBoost()
+    {
+        this.power *= 2;
+        StartCoroutine(removeAtkBoostAfter(2f));
+    }
+
+    IEnumerator removeAtkBoostAfter(float time)
+    {
+        yield return new WaitForSeconds(time);
+        this.power /= 2;
+    }
 }
