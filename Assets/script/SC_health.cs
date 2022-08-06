@@ -18,6 +18,9 @@ public class SC_health : MonoBehaviour
     public float tempsbouclier_max;
     private float tempsbouclier_restant;
 
+    [SerializeField]
+    private SC_HealthBar healthBar;
+
     
 
 
@@ -46,6 +49,7 @@ public class SC_health : MonoBehaviour
         if(current_hp < max_hp)
         {
             current_hp += 1;
+            this.healthBar.updateHealthBar();
         }
     }
 
@@ -65,6 +69,7 @@ public class SC_health : MonoBehaviour
 
         //On diminue les pj d'autant que n�cessaire
         current_hp -= damage;
+        this.healthBar.updateHealthBar();
 
         //On rend invicible le gameobject (si tempsInvicibilite_max = 0, il se deviendra pas invincible)
         tempsInvicibilite_restant = tempsInvicibilite_max;
@@ -79,6 +84,11 @@ public class SC_health : MonoBehaviour
                 dieEnnemy();
             }
         }
+    }
+
+    public float GetCurrentHP()
+    {
+        return this.current_hp;
     }
 
     private void dieEnnemy()

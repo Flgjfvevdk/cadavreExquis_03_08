@@ -27,7 +27,7 @@ public class SC_ennemi_02 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        player = GameObject.FindGameObjectWithTag("Player"); // on récupère une référence au player
+        player = GameObject.FindGameObjectWithTag("Player"); // on rï¿½cupï¿½re une rï¿½fï¿½rence au player
 
         delaieRestant_charge = delaieMax_charge;
     }
@@ -35,7 +35,7 @@ public class SC_ennemi_02 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // on gère l'affichage du timing avnt la prochaine charge _______________
+        // on gï¿½re l'affichage du timing avnt la prochaine charge _______________
         if (affichageProchaineCharge != null && delaieMax_charge > 0)
         {
             affichageProchaineCharge.pourcentageRemplissage = (delaieMax_charge - delaieRestant_charge) / delaieMax_charge;
@@ -49,7 +49,7 @@ public class SC_ennemi_02 : MonoBehaviour
             if(dureeRestant_charge > 0)
             {
                 rb.velocity = speedCharge * new Vector2(Mathf.Cos(transform.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.eulerAngles.z * Mathf.Deg2Rad));
-                //S'il n'a pas finit ça charge, on cancel le reste du update
+                //S'il n'a pas finit ï¿½a charge, on cancel le reste du update
                 return;
             }else
             {
@@ -60,16 +60,16 @@ public class SC_ennemi_02 : MonoBehaviour
 
 
         // On change l'angle de l'ennemi pour qu'il regarde toujours le player. _____________________________________________
-        // Ce script fonctionne car l'angle 0 correspond à l'ennemi qui regarde à droite
+        // Ce script fonctionne car l'angle 0 correspond ï¿½ l'ennemi qui regarde ï¿½ droite
         Vector2 difference_player_ennemi = player.transform.position - transform.position;
 
         float angleRot = transform.eulerAngles.z * Mathf.Deg2Rad; //en radiant, angle de rotation du gameobject
         Vector2 directionRegard = new Vector2(Mathf.Cos(angleRot), Mathf.Sin(angleRot));
 
-        float d = Vector3.SignedAngle(directionRegard, difference_player_ennemi, Vector3.forward); //angle de différence entre la direction vers le joueur et la direction vers lequel regarde l'ennemi
+        float d = Vector3.SignedAngle(directionRegard, difference_player_ennemi, Vector3.forward); //angle de diffï¿½rence entre la direction vers le joueur et la direction vers lequel regarde l'ennemi
         if (Mathf.Abs(d) < vitesseRotation * Time.deltaTime)
         {
-            //On est ici si l'angle de différence entre la direction vers le joueur et la direction vers lequel regarde l'ennemi est suffisamment faible
+            //On est ici si l'angle de diffï¿½rence entre la direction vers le joueur et la direction vers lequel regarde l'ennemi est suffisamment faible
             float nouvelleAngle = Mathf.Atan2(difference_player_ennemi.y, difference_player_ennemi.x);
 
             transform.eulerAngles = new Vector3(0, 0, nouvelleAngle * Mathf.Rad2Deg);

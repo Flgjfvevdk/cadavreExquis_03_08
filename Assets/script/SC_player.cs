@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Ne pas oublier d'importer �a pour utiliser le new input systeme _______________________________________________________________
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
 public class SC_player : MonoBehaviour
 {
@@ -68,23 +68,25 @@ public class SC_player : MonoBehaviour
         // On g�re le dash (action2)
         if (isDashing)
         {
-            if(t_dash < dureeDash)
+            if (t_dash < dureeDash)
             {
                 rb.velocity = vitesseDash * directionDash.normalized;
                 t_dash += Time.deltaTime;
 
                 //On fait le spawn de petite particule
-                if(delaieRestant_spawnPetiteParticule <= 0)
+                if (delaieRestant_spawnPetiteParticule <= 0)
                 {
                     Instantiate(petiteParticule, transform.position, Quaternion.identity);
                     delaieRestant_spawnPetiteParticule = delaieMax_spawnPetiteParticule;
-                } else
+                }
+                else
                 {
                     delaieRestant_spawnPetiteParticule -= Time.deltaTime;
                 }
 
                 return; //En mettant ce return ici, cela permet d'emp�cher de tirer et de se d�placer pendant le dash. (c'est important de pas pouvoir se d�placer pdt le dash vu la fa�on dont est cod� le dash
-            }else
+            }
+            else
             {
                 isDashing = false;
                 healthScript.cantBeDamaged = false;
@@ -92,15 +94,18 @@ public class SC_player : MonoBehaviour
                 //on s'occupe de changer l'opacit� pour la remettre � 1
                 Color ancienneCouleur = GetComponent<SpriteRenderer>().color;//On enregistre la couleur qu'on a donn� au joueur pour pas lui changer.
                 GetComponent<SpriteRenderer>().color = new Color(ancienneCouleur.r, ancienneCouleur.g, ancienneCouleur.b, 1);
-                
+
                 delaieRestant_dash = delaieMax_dash; //On commence la recup de delaie du dash seulement � la fin de celui ci
             }
         }
 
         //On d�place le joueur si n�cessaire en jouant sur sa vitesse avec l'option slow
-        if (action_5_Input_isPressed) {
-            rb.velocity = speed * directionInput/2;
-        } else {
+        if (action_5_Input_isPressed)
+        {
+            rb.velocity = speed * directionInput / 2;
+        }
+        else
+        {
             rb.velocity = speed * directionInput;
         }
 
@@ -142,11 +147,13 @@ public class SC_player : MonoBehaviour
         }
         // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // on gère les actions possibles avec le bouclier
-        if (action_3_Input_isPressed && shield > 0){ // en utilisant 1 "bouclier" le joueur peut se shield
+        if (action_3_Input_isPressed && shield > 0)
+        { // en utilisant 1 "bouclier" le joueur peut se shield
             shield -= 1;
             healthScript.getShield();
         }
-        if (action_4_Input_isPressed && shield >= 3){ // en utilisant 3 "bouclier" le joueur peut détruire tout les projectiles présents
+        if (action_4_Input_isPressed && shield >= 3)
+        { // en utilisant 3 "bouclier" le joueur peut détruire tout les projectiles présents
             shield -= 3;
             foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("MainCamera"))
             {
@@ -159,13 +166,13 @@ public class SC_player : MonoBehaviour
         }
         isShield = healthScript.IsShielded();
 
-        
+
 
     }
 
     private void miseAJour_variablesTemporelles()
     {
-        if(delaieRestant_tir >= 0)
+        if (delaieRestant_tir >= 0)
         {
             delaieRestant_tir -= Time.deltaTime;
         }
@@ -176,7 +183,7 @@ public class SC_player : MonoBehaviour
     }
 
     // fonctions de gestion du shield
-     public void addShield()
+    public void addShield()
     {
         shield += 1;
     }
@@ -229,8 +236,8 @@ public class SC_player : MonoBehaviour
             action_3_Input_isPressed = false;
         }
     }
-   
-   public void maj_action_4_Input(InputAction.CallbackContext ctx)
+
+    public void maj_action_4_Input(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
@@ -256,6 +263,11 @@ public class SC_player : MonoBehaviour
             //On est l� quand le joueur vient de relacher la touche
             action_5_Input_isPressed = false;
         }
+    }
+
+    public SC_health GetPlayerHealth()
+    {
+        return this.healthScript;
     }
 
     // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
