@@ -57,6 +57,8 @@ public class SC_player : MonoBehaviour
     private bool action_4_Input_isPressed; //Pour voir quel touche est lieu � �a, aller voir gestionnaireControlJeu (pas le script)
     private bool action_5_Input_isPressed; //Pour voir quel touche est lieu � �a, aller voir gestionnaireControlJeu (pas le script)
     // ____________________________________________________
+    // pour savoir si on a declenche la destruction des projectiles
+    private bool isDestroying;
 
     // Awake est appel� quand l'instance du script est charg� (et donc avant les �ventuelles start)
     void Awake()
@@ -64,8 +66,10 @@ public class SC_player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>(); //on r�cup�re la composante rigidbody2D du gameobject attach� � ce script
         healthScript = GetComponent<SC_health>(); //on r�cup�re une r�f�rence au script de pv
         shield = 0;
+        Debug.Log("init");
         isShield = false;
         power = 1;
+        isDestroying = false;
     }
 
     // Update is called once per frame
@@ -156,13 +160,13 @@ public class SC_player : MonoBehaviour
         }
         // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // on gère les actions possibles avec le bouclier
-        if (action_3_Input_isPressed && shield > 0)
+        if (action_3_Input_isPressed && shield > 0 && !isShield)
         { // en utilisant 1 "bouclier" le joueur peut se shield
             shield -= 1;
             shieldText.UpdateRemaining(shield);
             playerShield.getShield();
         }
-        if (action_4_Input_isPressed && shield >= 3)
+        if (action_4_Input_isPressed && shield >= 3 && !isDestroying)
         { // en utilisant 3 "bouclier" le joueur peut détruire tout les projectiles présents
             shield -= 3;
             shieldText.UpdateRemaining(shield);
@@ -174,11 +178,19 @@ public class SC_player : MonoBehaviour
             {
                 Destroy(bullet);
             }
+            isDestroying = true;
+            StartCoroutine(DestructionCooldown());
         }
         isShield = playerShield.IsShielded();
 
 
 
+    }
+
+    private IEnumerator DestructionCooldown()
+    {
+        yield return new WaitForSeconds(2);
+        isDestroying = false;
     }
 
     private void miseAJour_variablesTemporelles()

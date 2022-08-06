@@ -18,12 +18,14 @@ public class SC_health : MonoBehaviour
     [SerializeField]
     private SC_HealthBar healthBar;
 
-
+    [SerializeField]
+    private SC_score score;
 
     // Start is called before the first frame update
     void Start()
     {
         current_hp = max_hp;
+        score = GameObject.FindGameObjectWithTag("Score").GetComponent<SC_score>();
     }
 
     private void Update()
@@ -82,8 +84,8 @@ public class SC_health : MonoBehaviour
     private void dieEnnemy()
     {
         //On peut rajouter un effet � la mort ou autre ici
+        score.score += Mathf.FloorToInt(100 * max_hp);
         Destroy(gameObject);
-
     }
 
     private void diePlayer()
