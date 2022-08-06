@@ -9,7 +9,7 @@ public class SC_balle : MonoBehaviour
     private Rigidbody2D rb;
     public int power { get; set; }
 
-    public bool isFromPlayer; //Si c'est vrai alors la balle va tenter de kill les ennemies, sinon ce sera le joueur
+    public bool isFromPlayer; //Si c'est vrai alors la balle va tenter de kill les ennemis, sinon ce sera le joueur
 
     public GameObject particule_effetFinVie;
     void Awake()
@@ -30,7 +30,7 @@ public class SC_balle : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //2 cas de figures possibles, soit la balle vient du player et target les ennemies. Soit elle ne vient pas du joueur et le target 
+        //2 cas de figures possibles, soit la balle vient du player et target les ennemis. Soit elle ne vient pas du joueur et le target 
         if ((isFromPlayer && collision.CompareTag("Ennemi")) || (!isFromPlayer && collision.CompareTag("Player")))
         {
             collision.GetComponent<SC_health>().getHit(power);
