@@ -11,10 +11,13 @@ public class SC_balle : MonoBehaviour
 
     public bool isFromPlayer; //Si c'est vrai alors la balle va tenter de kill les ennemis, sinon ce sera le joueur
 
+    public bool dontDetroyOnHit; //Si c'est vrai alors la balle ne s'auto détruit pas quand elle touche quelque chose
+
     public GameObject particule_effetFinVie;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        power = 1;
     }
 
     public void allerVers(Vector2 direction)
@@ -44,6 +47,12 @@ public class SC_balle : MonoBehaviour
             particule.GetComponent<SC_petiteParticule>().size_fin = transform.localScale.x * 2f;
             particule.GetComponent<SC_petiteParticule>().tempsDeVieMax = 0.1f;
 
+            if (!dontDetroyOnHit) { 
+                Destroy(gameObject);    
+            }
+        }
+        if (!isFromPlayer && !dontDetroyOnHit && collision.CompareTag("Projectile") &&  collision.GetComponent<SC_balle>().isFromPlayer == true)
+        {
             Destroy(gameObject);
         }
     }

@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5836313933438465356, guid: a1dcc4ebe1191b84694a3439f66b28fd, type: 3}
       propertyPath: vitesseRotation
-      value: 60
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5836313933438465356, guid: a1dcc4ebe1191b84694a3439f66b28fd, type: 3}
       propertyPath: dureeMax_laserActif

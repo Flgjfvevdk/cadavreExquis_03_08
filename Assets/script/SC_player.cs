@@ -40,8 +40,11 @@ public class SC_player : MonoBehaviour
 
     // Variables pour l'attaque
     public int power { set; get; }
+    private bool is_nextAttackBoosted;
 
     // Variables pour le shield ____________________________
+    public int shieldMax;
+    [System.NonSerialized]
     public int shield;
     public bool isShield;
     [SerializeField]
@@ -139,6 +142,14 @@ public class SC_player : MonoBehaviour
             projectile.GetComponent<SC_balle>().allerVers(directionTir, vitesseProjectile); // On r�cup�re le script de l'objet instanti� et on ex�cute un script � distance
             projectile.GetComponent<SC_balle>().isFromPlayer = true;
             projectile.GetComponent<SC_balle>().power = this.power;
+
+            if (is_nextAttackBoosted)
+            {
+                is_nextAttackBoosted = false;
+                projectile.GetComponent<SC_balle>().power = 3;
+                projectile.GetComponent<SC_balle>().dontDetroyOnHit = true;
+                projectile.transform.localScale = 5 * projectile.transform.localScale;
+            }
         }
 
         //Le joueur effectue l'action 2 si voulue /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,7 +219,10 @@ public class SC_player : MonoBehaviour
     // fonctions de gestion du shield
     public void addShield()
     {
-        shield += 1;
+        if( shield < shieldMax)
+        {
+            shield += 1;
+        }
         shieldText.UpdateRemaining(shield);
     }
 
@@ -298,8 +312,9 @@ public class SC_player : MonoBehaviour
     // gestion des boosts d'atk
     public void StartAtkBoost()
     {
-        this.power *= 2;
-        StartCoroutine(removeAtkBoostAfter(2f));
+        is_nextAttackBoosted = true;
+        //this.power *= 2;
+        //StartCoroutine(removeAtkBoostAfter(2f));
     }
 
     IEnumerator removeAtkBoostAfter(float time)

@@ -8,6 +8,9 @@ TagManager:
   - wall
   - Projectile
   - Score
+  - ItemHeal
+  - ItemAttack
+  - ItemShield
   layers:
   - Default
   - TransparentFX

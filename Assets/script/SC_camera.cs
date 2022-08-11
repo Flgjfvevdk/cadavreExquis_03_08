@@ -22,6 +22,10 @@ public class SC_camera : MonoBehaviour
         if (shake > 0.0f) {
             gameObject.transform.localPosition = Random.insideUnitSphere * shakeAmount + new Vector3(0,0,-10);
             shake -= Time.deltaTime * decreaseFactor;
+            foreach(GameObject ennemi in GameObject.FindGameObjectsWithTag("Ennemi"))
+            {
+                ennemi.GetComponent<SC_ennemiStun>().unactive();
+            }
         } else {
             shake = 0.0f;
             gameObject.transform.localPosition = new Vector3(0,0,-10);

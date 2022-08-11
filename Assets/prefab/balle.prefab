@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9082838571482058273}
   m_Layer: 0
   m_Name: balle
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 0.87649953, b: 0, a: 1}
+  m_Color: {r: 0.9433962, g: 0.32395867, b: 0.49204063, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   isFromPlayer: 0
+  dontDetroyOnHit: 0
   particule_effetFinVie: {fileID: 6914075716285744311, guid: aee18b42a4ac60747a36cf39f2898798, type: 3}
 --- !u!114 &9082838571482058273
 MonoBehaviour:

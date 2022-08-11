@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -886011156923362984}
   m_Layer: 0
   m_Name: heal_iteam
-  m_TagString: Untagged
+  m_TagString: ItemHeal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,6 +85,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particule_effetFinVie: {fileID: 6914075716285744311, guid: aee18b42a4ac60747a36cf39f2898798, type: 3}
+  pv_healed: 3
 --- !u!1 &6016853480072937003
 GameObject:
   m_ObjectHideFlags: 0

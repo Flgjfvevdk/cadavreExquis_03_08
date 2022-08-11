@@ -8,6 +8,10 @@ public class SC_shieldAmmo : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI remaining;
+
+    public int maxShieldValue;
+    public Color couleurBase;
+    public Color couleurMax;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,11 +21,17 @@ public class SC_shieldAmmo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     public void UpdateRemaining(int qty)
     {
         this.remaining.text = qty.ToString();
+        if(qty >= maxShieldValue)
+        {
+            remaining.color = couleurMax;
+        } else
+        {
+            remaining.color = couleurBase;
+        }
     }
 }

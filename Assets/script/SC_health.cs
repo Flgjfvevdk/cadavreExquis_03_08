@@ -18,7 +18,7 @@ public class SC_health : MonoBehaviour
     [SerializeField]
     private SC_HealthBar healthBar;
 
-    [SerializeField]
+
     private SC_score score;
 
     // Start is called before the first frame update
@@ -37,18 +37,18 @@ public class SC_health : MonoBehaviour
         }
     }
 
-    public void getLife()
+    public void getLife(float value = 1)
     {
         if (current_hp < max_hp)
         {
-            current_hp += 1;
+            current_hp += value;
             this.healthBar.updateHealthBar();
         }
     }
 
 
 
-    public void getHit(float damage = 1) //On surchage getHit
+    public void getHit(float damage = 1) 
     {
         // Si cantBeDamaged est vrai, alors on annule le getHit
         if (cantBeDamaged || tempsInvicibilite_restant > 0)
@@ -84,7 +84,8 @@ public class SC_health : MonoBehaviour
     private void dieEnnemy()
     {
         //On peut rajouter un effet � la mort ou autre ici
-        score.score += Mathf.FloorToInt(100 * max_hp);
+        //score.score += Mathf.FloorToInt(max_hp);
+        score.ajouterScore_mortEnnemy(max_hp);
         Destroy(gameObject);
     }
 

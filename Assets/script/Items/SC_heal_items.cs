@@ -6,6 +6,8 @@ public class SC_heal_items : MonoBehaviour
 {
     private Rigidbody2D rb;
     public GameObject particule_effetFinVie;
+
+    public float pv_healed;
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -16,7 +18,7 @@ public class SC_heal_items : MonoBehaviour
         //si le joueur récupère l'items
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<SC_health>().getLife();
+            collision.GetComponent<SC_health>().getLife(pv_healed);
 
             Destroy(gameObject);
         }

@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48b7963d45edaf94ca585476ef71c8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempsbouclier_max: 0
+  shieldImage: {fileID: 0}
+  health: {fileID: 0}
 --- !u!1 &4316734182688216815
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,6 +62,8 @@ GameObject:
   - component: {fileID: 4316734182688216805}
   - component: {fileID: 4316734182688216804}
   - component: {fileID: 5512647161605489439}
+  - component: {fileID: 8668492372401116784}
+  - component: {fileID: 7160050482455284394}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -263,13 +268,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   balle_prefab: {fileID: 3697946591887837818, guid: 60e872f7eba185d428fc77daed5177ca, type: 3}
-  vitesseProjectile: 30
+  vitesseProjectile: 40
   delaieMax_tir: 0.2
   dureeDash: 0.08
   vitesseDash: 70
   delaieMax_dash: 1
   opacitePendantDash: 0.5
   petiteParticule: {fileID: 6914075716285744311, guid: aee18b42a4ac60747a36cf39f2898798, type: 3}
+  shieldMax: 3
+  isShield: 0
+  playerShield: {fileID: 0}
+  shieldText: {fileID: 0}
 --- !u!114 &5512647161605489439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,4 +295,116 @@ MonoBehaviour:
   isPlayer: 1
   tempsInvicibilite_max: 0.5
   cantBeDamaged: 0
-  tempsbouclier_max: 0
+  healthBar: {fileID: 0}
+--- !u!82 &8668492372401116784
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4316734182688216815}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 85df759870f2e9f419eddfe1ce081435, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7160050482455284394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4316734182688216815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ba1258a44082d4da18b64ccfb488ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 8668492372401116784}
+  musiques:
+  - {fileID: 8300000, guid: 7b3dbdee3063624488c1e80f5170e27b, type: 3}
+  - {fileID: 8300000, guid: 85df759870f2e9f419eddfe1ce081435, type: 3}

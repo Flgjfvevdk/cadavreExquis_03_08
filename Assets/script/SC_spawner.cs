@@ -24,9 +24,10 @@ public class SC_spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        i ++; 
-        delaieRestant_spawn -= Time.deltaTime*(i/(Mathf.Log(i)*1000));
-        if(delaieRestant_spawn <= 0 && GameObject.FindGameObjectsWithTag(objet.tag).Length < MAX_INSTANCES)
+        i ++;
+        //delaieRestant_spawn -= Time.deltaTime * (i / (Mathf.Log(i) * 1000));
+        delaieRestant_spawn -= Time.deltaTime;
+        if (delaieRestant_spawn <= 0 && GameObject.FindGameObjectsWithTag(objet.tag).Length < MAX_INSTANCES)
         {
             float angleAleat = Random.Range(0f, 360f);
             float r = Random.Range(0f, rayonSpawn);
@@ -34,5 +35,6 @@ public class SC_spawner : MonoBehaviour
             Instantiate(objet, transform.position + r * new Vector3(Mathf.Cos(angleAleat), Mathf.Sin(angleAleat), 0), Quaternion.identity);
             delaieRestant_spawn = delaieMax_spawn;
         }
+
     }
 }
