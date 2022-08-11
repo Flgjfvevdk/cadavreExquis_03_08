@@ -249,6 +249,34 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ControlMenu"",
+            ""id"": ""01ae5739-cd2a-4cfc-a87a-648856c5f742"",
+            ""actions"": [
+                {
+                    ""name"": ""Enter"",
+                    ""type"": ""Button"",
+                    ""id"": ""53c8cbaf-72b7-4fa3-a457-812482c26179"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""7acd502c-0593-44ed-b727-da31a50408d6"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -261,6 +289,9 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
         m_Player_Shield = m_Player.FindAction("Shield", throwIfNotFound: true);
         m_Player_ShieldSurcharge = m_Player.FindAction("ShieldSurcharge", throwIfNotFound: true);
         m_Player_Slow = m_Player.FindAction("Slow", throwIfNotFound: true);
+        // ControlMenu
+        m_ControlMenu = asset.FindActionMap("ControlMenu", throwIfNotFound: true);
+        m_ControlMenu_Enter = m_ControlMenu.FindAction("Enter", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -389,6 +420,39 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // ControlMenu
+    private readonly InputActionMap m_ControlMenu;
+    private IControlMenuActions m_ControlMenuActionsCallbackInterface;
+    private readonly InputAction m_ControlMenu_Enter;
+    public struct ControlMenuActions
+    {
+        private @GestionnaireControleJeu m_Wrapper;
+        public ControlMenuActions(@GestionnaireControleJeu wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Enter => m_Wrapper.m_ControlMenu_Enter;
+        public InputActionMap Get() { return m_Wrapper.m_ControlMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ControlMenuActions set) { return set.Get(); }
+        public void SetCallbacks(IControlMenuActions instance)
+        {
+            if (m_Wrapper.m_ControlMenuActionsCallbackInterface != null)
+            {
+                @Enter.started -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnEnter;
+                @Enter.performed -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnEnter;
+                @Enter.canceled -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnEnter;
+            }
+            m_Wrapper.m_ControlMenuActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Enter.started += instance.OnEnter;
+                @Enter.performed += instance.OnEnter;
+                @Enter.canceled += instance.OnEnter;
+            }
+        }
+    }
+    public ControlMenuActions @ControlMenu => new ControlMenuActions(this);
     public interface IPlayerActions
     {
         void OnDeplacement(InputAction.CallbackContext context);
@@ -397,5 +461,9 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
         void OnShield(InputAction.CallbackContext context);
         void OnShieldSurcharge(InputAction.CallbackContext context);
         void OnSlow(InputAction.CallbackContext context);
+    }
+    public interface IControlMenuActions
+    {
+        void OnEnter(InputAction.CallbackContext context);
     }
 }

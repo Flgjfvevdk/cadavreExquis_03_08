@@ -227,6 +227,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ControlMenu",
+            "id": "01ae5739-cd2a-4cfc-a87a-648856c5f742",
+            "actions": [
+                {
+                    "name": "Enter",
+                    "type": "Button",
+                    "id": "53c8cbaf-72b7-4fa3-a457-812482c26179",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7acd502c-0593-44ed-b727-da31a50408d6",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Enter",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

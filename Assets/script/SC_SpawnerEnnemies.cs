@@ -52,10 +52,10 @@ public class SC_SpawnerEnnemies : MonoBehaviour
         {
             t += Time.deltaTime;
         }
-        //delaieRestant_spawn -= Time.deltaTime * (1 + t / (Mathf.Log(t + 2) * 100));
-        delaieRestant_spawn -= Time.deltaTime * (1 + Mathf.Log(1+t)/5.0f);
-        Debug.Log(1 + Mathf.Log(1 + t) / 5.0f);
+
         //delaieRestant_spawn -= Time.deltaTime;
+        delaieRestant_spawn -= Time.deltaTime * (1 + Mathf.Log(1+t)/5.0f);
+        //Debug.Log(1 + Mathf.Log(1 + t) / 5.0f);
 
         if (delaieRestant_spawn < 0 && GameObject.FindGameObjectsWithTag("Ennemi").Length < MAX_INSTANCES)
         {

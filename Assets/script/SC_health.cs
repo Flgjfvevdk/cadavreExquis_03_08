@@ -91,9 +91,10 @@ public class SC_health : MonoBehaviour
 
     private void diePlayer()
     {
-        // Juste un truc provisoire � changer
-        Debug.LogWarning("Faudra changer, pour l'instant on reload juste la scene quand le pj meurt");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //Debug.LogWarning("Faudra changer, pour l'instant on reload juste la scene quand le pj meurt");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        SceneManager.LoadScene("sceneFin");
     }
 
     public bool isInvincible()

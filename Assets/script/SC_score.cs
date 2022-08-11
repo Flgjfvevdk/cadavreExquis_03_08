@@ -22,6 +22,7 @@ public class SC_score : MonoBehaviour
     {
         score += Time.deltaTime;
         scoreText.text = "Score : " + Mathf.Floor(score);
+        SC_affichageScoreFin.score = Mathf.FloorToInt(score);
     }
 
     public void ajouterScore_mortEnnemy(float pvEnnemi)
