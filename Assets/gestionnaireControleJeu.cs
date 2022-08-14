@@ -262,6 +262,15 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""C"",
+                    ""type"": ""Button"",
+                    ""id"": ""aff01cb1-3532-410d-9df0-1ff1ef468cf9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -273,6 +282,17 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Enter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f53ec31-e7e3-4e6c-852b-fabe3d70c418"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""C"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -292,6 +312,7 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
         // ControlMenu
         m_ControlMenu = asset.FindActionMap("ControlMenu", throwIfNotFound: true);
         m_ControlMenu_Enter = m_ControlMenu.FindAction("Enter", throwIfNotFound: true);
+        m_ControlMenu_C = m_ControlMenu.FindAction("C", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -425,11 +446,13 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
     private readonly InputActionMap m_ControlMenu;
     private IControlMenuActions m_ControlMenuActionsCallbackInterface;
     private readonly InputAction m_ControlMenu_Enter;
+    private readonly InputAction m_ControlMenu_C;
     public struct ControlMenuActions
     {
         private @GestionnaireControleJeu m_Wrapper;
         public ControlMenuActions(@GestionnaireControleJeu wrapper) { m_Wrapper = wrapper; }
         public InputAction @Enter => m_Wrapper.m_ControlMenu_Enter;
+        public InputAction @C => m_Wrapper.m_ControlMenu_C;
         public InputActionMap Get() { return m_Wrapper.m_ControlMenu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -442,6 +465,9 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                 @Enter.started -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnEnter;
                 @Enter.performed -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnEnter;
                 @Enter.canceled -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnEnter;
+                @C.started -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnC;
+                @C.performed -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnC;
+                @C.canceled -= m_Wrapper.m_ControlMenuActionsCallbackInterface.OnC;
             }
             m_Wrapper.m_ControlMenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -449,6 +475,9 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
                 @Enter.started += instance.OnEnter;
                 @Enter.performed += instance.OnEnter;
                 @Enter.canceled += instance.OnEnter;
+                @C.started += instance.OnC;
+                @C.performed += instance.OnC;
+                @C.canceled += instance.OnC;
             }
         }
     }
@@ -465,5 +494,6 @@ public partial class @GestionnaireControleJeu : IInputActionCollection2, IDispos
     public interface IControlMenuActions
     {
         void OnEnter(InputAction.CallbackContext context);
+        void OnC(InputAction.CallbackContext context);
     }
 }
